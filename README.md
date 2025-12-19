@@ -7,6 +7,11 @@ Within rapid development of E-Commerce during pandemic, timely construction of i
 A precise model for estimating construction time ensures efficient planning and resource allocation, vital for meeting the demands of rapidly growing online retail. With accurate projections, businesses can strategize their supply chain management effectively, optimizing delivery schedules and customer satisfaction. 
 Developing a precise and efficient model for predicting construction completion and recognizing features from satellite images can help firms monitor their construction projects, enhance project management, and provide a more reliable forecast of supply for both businesses and the real estate industry. Firms will have more current information about their construction progress through updated satellite imageries.
 
+## Data
+We use the UC_buildings dataset, which provides building-level geographic information, including longitude and latitude coordinates, as the primary spatial reference. 
+We used the longitude and latitude coordinates to manually search for satellite images (on Bing & Google Maps) of the indicated construction sites. Areas of focus are manually adjusted to target active construction zones, allowing the analysis to concentrate on regions undergoing development. 
+
+
 ## Approach
 
 We divided our approach into 2 parts for this Datathon: 
