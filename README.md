@@ -29,7 +29,7 @@ We use the UC_buildings dataset, which provides building-level geographic inform
 | CeilingHeight                   | The distance in feet between the floor and the ceiling joists                      |
 
 
-We used the longitude and latitude coordinates to manually search for satellite images (on Bing & Google Maps) of the indicated construction sites, and label each image with corresponding construction stage. Areas of focus are manually adjusted to target active construction zones, allowing the analysis to concentrate on regions undergoing development. 
+We used the longitude and latitude coordinates to manually search for satellite images (on Bing & Google Maps) of the indicated construction sites, and label each image with corresponding construction stage (imgname_STAGENUMBER). Areas of focus are manually adjusted to target active construction zones, allowing the analysis to concentrate on regions undergoing development. 
 The construction stage is defined as below: 
 
 | Stage & Label                        | % Complete | Visual Indicators |
@@ -52,17 +52,19 @@ We used a pretrained VGG16 model from pytorch and finetuned the fully connected 
 
 **2. Pretrained and modified ResNet18 model with dropout layers**
 For such a small dataset (with 222 images), overfitting becomes a problem. We modified a pretrained ResNet50 model and added a dropout layer to the fully connected layer in order to reduce overfitting and increase generalizability. 
-For this model, we applied 5-fold cross validation method as well as data augmentation and normalization to solve the problem of small training and validation data size, with a scheduled learning rate between [0.001, 0.0005, 0.0001]. We trained 50 epochs for each learning rate across 5 folds. Then we picked the best performing fold and learning rate, which turned out to be 4th fold and learning rate = 0.001, and trained for another 100 epochs as our final model.
-
 For modified ResNet18 model, we used following steps to prepare training: 
 1. Transforming & normalizing datasets: to solve the issue of small dataset and improve the model's generalization.
 2. Define the pretrained, modified ResNet18 model: dropout layers added in fully connected layers to avoid overfitting.
 3. 5-fold cross validation: also to avoid overfitting.
-4. Scheduled Learning Rate with 0.001, 0.0005, 0.0001
+4. Scheduled Learning Rate with lr = [0.001, 0.0005, 0.0001], 50 epochs each
 5. Fine-tuning: freezing layers except for the fully connected layers
 
+We picked the best performing fold and learning rate, which turned out to be 4th fold and learning rate = 0.001, and trained for another 100 epochs as our final model (ResNet_Datathon(1)).
 
-## Results
+
+
+## Results for ResNet18 Model (Final Model) 
+
 
 
 
