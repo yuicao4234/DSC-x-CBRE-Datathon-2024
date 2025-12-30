@@ -113,5 +113,39 @@ Where:
 
 This allows us to forecast **how long the project will take to complete**, assuming linear construction progress, and estimate **future completion quarter** for each site.
 
+## Problems & Next Steps
 
+* **Limited dataset size**
+
+  * Only 222 labeled construction images available.
+  * Increases risk of overfitting and reduces generalization.
+
+* **Manual labeling of satellite images**
+
+  * Time-consuming and labor-intensive.
+  * Possible mismatch between address and satellite coordinates.
+  * Visual ambiguity when identifying construction stage from top-down imagery.
+  * Missing/unknown timestamps for imagery affects progress estimation accuracy.
+
+### Future Improvements
+
+* **Increase dataset quality and size**
+
+  * Integrate **U.S. Census block GeoJSON data** for easier geographic referencing.
+  * Expand training dataset and collect multiple timestamps per site.
+
+* **Improve model performance**
+
+  * Conduct **hyperparameter tuning** (random search for LR, batch size, dropout, etc.).
+  * Explore more architectures (EfficientNet, ViT, UNet for segmentation).
+
+* **Enhance time-estimation accuracy**
+
+  * Incorporate **satellite image capture date** into dataset.
+  * Adjust progress-based duration formula accounting for non-linear construction stages.
+
+* **Error investigation**
+
+  * Analyze cases where **predicted vs. actual construction stage** differs.
+  * Use explainability methods (Grad-CAM, feature visualization).
 
