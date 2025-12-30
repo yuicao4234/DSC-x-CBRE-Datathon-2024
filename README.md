@@ -64,10 +64,17 @@ We picked the best performing fold and learning rate, which turned out to be 4th
 
 
 ## Results for ResNet18 Model (Final Model) 
+<img width="600" height="500" alt="Screenshot 2025-12-29 at 7 54 53 PM" src="https://github.com/user-attachments/assets/3d9fd7c1-a7d0-4512-beba-3b7990cdb7f3" />
+
+Our modified ResNet18 model with dropout and 5-fold cross-validation demonstrated strong learning performance. As shown in the plots, the learning rate of 0.001 consistently achieved the highest validation accuracy across most folds, outperforming lower learning rates. 
+While validation curves occasionally fluctuate, which is likely due to the small dataset size, the overall upward trend indicates effective feature learning. After selecting the best-performing fold **(Fold 4 at LR=0.001)** and fine-tuning for an extended 100 epochs, the model further stabilized, showing good convergence without severe overfitting. This suggests that fine-tuning pretrained weights with regularization is effective for small-sample satellite imagery classification.
 
 
+<img width="600" height="500" alt="Screenshot 2025-12-29 at 7 59 17 PM" src="https://github.com/user-attachments/assets/d4c89d09-36ce-45a9-ac4e-4c3936964584" />
 
-
+Across all five folds, the modified ResNet model showed a steady improvement in both training and validation accuracy, confirming that the model was learning meaningful visual features.  
+However, validation performance fluctuated across folds, indicating some sensitivity to the data split.  
+Among the folds, **Fold 4** demonstrated the most consistent and stable performance, achieving the highest average validation accuracy of ~0.69 after fine-tuning. This suggests that the ResNet model, especially at LR=0.001, generalizes reasonably well for construction-stage classification when trained with augmentation and dropout regularization.
 
 ## Classification
 
