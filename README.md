@@ -77,6 +77,41 @@ However, validation performance fluctuated across folds, indicating some sensiti
 Among the folds, **Fold 4** demonstrated the most consistent and stable performance, achieving the highest average validation accuracy of ~0.69 after fine-tuning. This suggests that the ResNet model, especially at LR=0.001, generalizes reasonably well for construction-stage classification when trained with augmentation and dropout regularization.
 
 ## Classification
-
+We classified the construction stage based on the following:  
+1. Load building + image metadata
+2. Apply trained ResNet model to each image
+3. Convert model outputs to discrete stage labels (1,2,3,4,5)
+4. Attach predictions back to the building table
+5. Map stages to percentage completion
+    - Each stage is associated with a typical completion percentage range (0–100%).
+    - assign representative value per stage (e.g., around 0%, 15%, 35%, 65%, 90–100%) to treat the stage prediction as an estimated fraction of construction completed.
 
 ## Construction completion date estimation
+After classifying each satellite image into one of the five construction stages (1–5), we estimated the construction progress percentage and used it to back-calculate the total project duration.
+
+**Stage-to-progress mapping:**
+
+| Stage | Meaning                   | Approx. % Complete |
+| ----- | ------------------------- | ------------------ |
+| 1     | Undeveloped Land          | 0%                 |
+| 2     | Ground Broken             | 1–25%              |
+| 3     | Concrete Pad              | 25–45%             |
+| 4     | Framing Going Up          | 45–85%             |
+| 5     | Near Completion/Completed | 85–100%            |
+
+We then applied a simple proportional formula to estimate total construction time:
+
+Estimated Total Duration = (Time Elapsed Since Ground Break) / (Progress % / 100)
+
+Estimated Remaining Time = Estimated Total Duration - Time Elapsed
+
+
+Where:
+
+* **Time Elapsed** = (Current Image Date – Ground Break Date)
+* **Progress %** = Stage Progress / 100
+
+This allows us to forecast **how long the project will take to complete**, assuming linear construction progress, and estimate **future completion quarter** for each site.
+
+
+
